@@ -6,7 +6,7 @@ SSH_KEY="path/to/your/key.pem"
 OUTPUT_FILE="/tmp/disk_space_report.txt"
 DATE=$(date '+%Y-%m-%d %H:%M:%S')
 
-# List of EC2 instances (replace with your actual instance details)
+# List of EC2 instances (not using a list, for initial run)
 declare -A instances=(
     ["instance1"]="user@ec2-xx-xx-xx-1.compute.amazonaws.com"
     ["instance2"]="user@ec2-xx-xx-xx-2.compute.amazonaws.com"
@@ -24,7 +24,7 @@ declare -A instances=(
 echo "Disk Space Report - Generated on $DATE" > $OUTPUT_FILE
 echo "========================================" >> $OUTPUT_FILE
 
-# Function to check disk space on a remote instance
+#  to check disk space on a remote instance
 check_disk_space() {
     local instance_name=$1
     local instance_address=$2
