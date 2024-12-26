@@ -71,8 +71,25 @@ pipeline {
                 }
             }
         }
+        
+        stage('Prod Confirmation') {
+            steps {
+                script {
+                    // ##### RM user confirmation
+                    def userChoice = input(id: 'ProdApproval',message: 'Do you want to move changes to production?',
+                                           parameters: [booleanParam(defaultValue: false, description: 'Check to move to production', name: 'Proceed_To_Prod')])
+                    if (userChoice) {
+                        echo 'Thankyou for approval. Proceeding to production pipeline...'
+                        // Trigger the production pipeline
+                        build job: 'prod-deployment-pipeline', parameters: [string(name: 'BUILD_VERSION', value: '1.0.0')] //Exit 1
+                    } else {
+                        echo 'Pipeline complete. Test your application at the staging URL:'
+                        echo "${env.TEST_URL}"
+                    }
+                }
+            }
     }
-
+    }
     post {
         always {
             echo 'Pipeline execution completed!'
