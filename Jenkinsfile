@@ -51,7 +51,7 @@ pipeline {
             steps {
                 echo "Deploying to ${params.DEPLOY_ENV} environment..."
                 echo "Uploading files to ${env.S3_BUCKET}..."
-                // Simulate upload to S3 bucket
+                // ##error2
                 sh "aws s3 cp ./build/ s3://${env.S3_BUCKET}/ --recursive"
             }
         }
@@ -65,7 +65,7 @@ pipeline {
                     } else {
                         echo 'Not running additional tests in Production.'
                         echo 'Sending deployment alert...'
-                        // Simulate sending an alert
+                        //  sending an alert
                         sh 'curl -X POST -d "Production deployment completed." https://alert-service.example.com'
                     }
                 }
