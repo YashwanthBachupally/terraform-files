@@ -76,12 +76,15 @@ pipeline {
     post {
         always {
             echo 'Pipeline execution completed!'
+            //### Mail Trigger
         }
         failure {
             echo 'Pipeline failed!'
+            //### Mail Trigger
         }
         success {
             echo 'Pipeline succeeded!'
+            // ### Mail Trigger
         }
     }
 }
